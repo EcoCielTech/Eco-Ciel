@@ -1,12 +1,51 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecociel/pages/homepage/homepage.dart';
 import 'package:ecociel/utils/text.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class SignInPage extends StatelessWidget {
+final _auth = FirebaseAuth.instance;
+
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  void submit(String email, String password, String name) async {
+    print(email);
+    print(password);
+    try {
+      final UserCredential = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      print("No Issued");
+      await FirebaseFirestore.instance
+          .collection('userdata')
+          .doc(UserCredential.user!.email)
+          .set({
+        'name': name,
+        'email': email,
+        'password': password,
+      });
+      print("User Created - ${UserCredential}");
+    } catch (e) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+      print(e);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController _name = TextEditingController();
     bool? value = false;
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +70,30 @@ class SignInPage extends StatelessWidget {
                 height: 160,
               ),
               TextField(
+                controller: _name,
+
                 // obscureText: obsText,
+                cursorColor: Colors.black,
+                style: const TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  labelText: 'Email or phone number',
+                  labelStyle: const TextStyle(color: Colors.black),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Colors
+                            .grey.shade400), // Change the border color on focus
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Colors
+                            .grey.shade400), // Change the border color on focus
+                  ),
+                ),
+              ),
+              TextField(
+                controller: _emailController,
                 cursorColor: Colors.black,
                 style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
@@ -55,6 +117,8 @@ class SignInPage extends StatelessWidget {
                 height: 20,
               ),
               TextField(
+                controller: _passwordController,
+
                 // obscureText: obsText,
                 cursorColor: Colors.black,
                 style: const TextStyle(color: Colors.black),
@@ -93,12 +157,17 @@ class SignInPage extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
-                    ),
+                  submit(
+                    _emailController.text,
+                    _passwordController.text,
+                    _name.text,
                   );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => HomePage(),
+                  //   ),
+                  // );
                 },
                 child: Container(
                   height: 60,
