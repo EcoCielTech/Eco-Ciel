@@ -8,7 +8,6 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
-
 class BackendServices {
   Future<String> changeOrderStatus({File? file}) async {
     // try {
@@ -57,5 +56,41 @@ class BackendServices {
       return "Error";
     }
     // Handle other exceptions if needed
+  }
+
+  Future<Map<String, String>> getUVIndexandWeatherData(
+      String lat, String lon, String month) async {
+    var urlStringForCurrentWeather =
+        "https://api.openweathermap.org/data/3.0/onecall?lat={$lat}&lon={$lon}&units=metric&appid=41bca8d01ca81fb04f760a9d65ea772d";
+
+    dio.Dio dioClient = dio.Dio();
+    final resp = await dioClient.get(urlStringForCurrentWeather);
+    final parsedCurrentWeatherData = json.decode(resp.data);
+
+    var openUVDataurl =
+        "https://api.openuv.io/api/v1/uv?lat=28.65&lng=77.17&alt=100&dt=";
+
+    final response = await dioClient.get(openUVDataurl,
+        options: dio.Options(
+          headers: {"x-access-token": "openuv-bytfqeorlrwfva24-io"},
+        ));
+
+    final parsedUVData = json.decode(response.data);
+
+    var urlStringForHistoryWeather =
+        "https://history.openweathermap.org/data/2.5/aggregated/month?lat={$lat}&lon={$lon}&month={$month}&units=metric&appid=41bca8d01ca81fb04f760a9d65ea772d";
+
+    final resp2 = await dioClient.get(urlStringForHistoryWeather);
+    final parsedHistoryWeatherData = json.decode(resp2.data);
+
+    return {
+      "currentTemp": parsedCurrentWeatherData["current"]["temp"],
+      "currentHumidity": parsedCurrentWeatherData["current"]["humidity"],
+      "currentPressure": parsedCurrentWeatherData["current"]["pressure"],
+      "currentClouds": parsedCurrentWeatherData["current"]["clouds"],
+      "uvdata": parsedUVData["result"]["uv"],
+      "uvdataskintime": parsedUVData["result"]["safe_exposure_time"]["st1"],
+      "historicaltemp": parsedHistoryWeatherData["result"]["temp"]["mean"]
+    };
   }
 }

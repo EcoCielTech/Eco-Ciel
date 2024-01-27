@@ -15,6 +15,294 @@ void submit(String email, String password) {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  List<DropdownMenuItem<int>> get dropdownItems {
+    List<DropdownMenuItem<int>> menuItems = [
+      DropdownMenuItem(
+        value: 15000,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<15000"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 25000,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<25000"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 50000,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<50000"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 75000,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<75000"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 95000,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<100000"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 100000,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<100000"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+    ];
+    return menuItems;
+  }
+
+  List<DropdownMenuItem<bool>> get dropdownItemsCommunityEvents {
+    List<DropdownMenuItem<bool>> menuItems = [
+      DropdownMenuItem(
+        value: true,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Yes"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: false,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("No"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+    ];
+    return menuItems;
+  }
+
+  List<DropdownMenuItem<int>> get dropdownItemsCommunityEventParticipants {
+    List<DropdownMenuItem<int>> menuItems = [
+      DropdownMenuItem(
+        value: 10,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<10"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 25,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<25"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 50,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<50"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 75,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<75"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 95,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("<100"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 100,
+        child: Container(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(">100"),
+              ),
+            ],
+          ),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+    ];
+    return menuItems;
+  }
+
+  int selectedValue = 15000;
+  int eventParticipantsPast = 10;
+  bool selectedValueCommunity = true;
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   @override
@@ -34,7 +322,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             children: [
               txt(
-                'Signup with your email or phone number',
+                'Signup with your email',
                 weight: FontWeight.w400,
                 size: 24,
                 textAlign: TextAlign.left,
@@ -97,7 +385,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 cursorColor: Colors.black,
                 style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                  labelText: 'Phone number',
+                  labelText: 'Name',
                   labelStyle: const TextStyle(color: Colors.black),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -116,25 +404,74 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 20,
               ),
-              TextField(
-                // obscureText: obsText,
-                cursorColor: Colors.black,
-                style: const TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  labelText: 'Gender',
-                  labelStyle: const TextStyle(color: Colors.black),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                        color: Colors
-                            .grey.shade400), // Change the border color on focus
+              Row(
+                children: [
+                  txt(
+                    'Monthly Income',
+                    color: Colors.black87,
+                    weight: FontWeight.w500,
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                        color: Colors
-                            .grey.shade400), // Change the border color on focus
+                ],
+              ),
+              DropdownButtonHideUnderline(
+                child: DropdownButton(
+                  value: selectedValue,
+                  underline: null,
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      selectedValue = newValue!;
+                    });
+                  },
+                  items: dropdownItems,
+                  isExpanded: true,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  txt(
+                    'Previous Community Event Organised',
+                    color: Colors.black87,
+                    weight: FontWeight.w500,
                   ),
+                ],
+              ),
+              DropdownButtonHideUnderline(
+                child: DropdownButton<bool>(
+                  value: selectedValueCommunity,
+                  onChanged: (bool? newValue) {
+                    setState(() {
+                      selectedValueCommunity = newValue!;
+                    });
+                  },
+                  items: dropdownItemsCommunityEvents,
+                  isExpanded: true,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  txt(
+                    'Previous Community Event Participation',
+                    color: Colors.black87,
+                    weight: FontWeight.w500,
+                  ),
+                ],
+              ),
+              DropdownButtonHideUnderline(
+                child: DropdownButton<int>(
+                  value: eventParticipantsPast,
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      eventParticipantsPast = newValue!;
+                    });
+                  },
+                  items: dropdownItemsCommunityEventParticipants,
+                  isExpanded: true,
                 ),
               ),
               const SizedBox(

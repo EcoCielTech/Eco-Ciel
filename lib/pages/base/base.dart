@@ -21,7 +21,7 @@ class Base extends StatefulWidget {
 class _BaseState extends State<Base> {
   List pages = [
     const HomePage(),
-    const RewardsPage(),
+    RewardsPage(),
     const StatsPage(),
     const ProfilePage(),
   ];
