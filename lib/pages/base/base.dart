@@ -1,5 +1,6 @@
 import 'package:ecociel/pages/base/controller/base_page_controller.dart';
-// import 'package:ecociel/pages/base/test_ocr.dart';
+import 'package:ecociel/pages/base/test_api.dart';
+import 'package:ecociel/pages/base/test_ocr.dart';
 import 'package:ecociel/pages/chart/stats_page.dart';
 import 'package:ecociel/pages/homepage/controller/homepage_controller.dart';
 import 'package:ecociel/pages/homepage/homepage.dart';
@@ -62,8 +63,8 @@ class _BaseState extends State<Base> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // Navigator.of(context)
-            //     .push(MaterialPageRoute(builder: (context) => TestOcr()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => PhotoCaptureScreen()));
           },
           child: const Icon(Icons.home),
           backgroundColor: Colors.green,
