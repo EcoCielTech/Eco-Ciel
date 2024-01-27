@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "892701034088",
+    "project_id": "ecoceil-58ef2",
+    "storage_bucket": "ecoceil-58ef2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892701034088:android:1fff7b9e9cc33e2ae61ddd",
+        "android_client_info": {
+          "package_name": "com.example.ecociel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdk4d17s0ig5fLgM97bcDdd3ZfUFeDQkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

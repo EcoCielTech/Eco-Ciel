@@ -9,6 +9,11 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
+void submit(String email, String password) {
+  print("Email: ${email}");
+  print("Pass: ${password}");
+}
+
 class _SignUpPageState extends State<SignUpPage> {
   List<DropdownMenuItem<int>> get dropdownItems {
     List<DropdownMenuItem<int>> menuItems = [
@@ -298,6 +303,8 @@ class _SignUpPageState extends State<SignUpPage> {
   int eventParticipantsPast = 10;
   bool selectedValueCommunity = true;
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     bool? value = false;
@@ -348,6 +355,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 20,
               ),
               TextField(
+                controller: _emailController,
+
                 // obscureText: obsText,
                 cursorColor: Colors.black,
                 style: const TextStyle(color: Colors.black),
@@ -516,6 +525,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               InkWell(
                 onTap: () {
+                  // submit(_emailController.text, _passwordController.text);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
