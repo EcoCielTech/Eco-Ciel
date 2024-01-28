@@ -22,91 +22,92 @@ class _BaseState extends State<Base> {
   List pages = [
     const HomePage(),
     RewardsPage(),
-    const StatsPage(),
+    StatsPage(),
     const ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
     final data = Provider.of<BaseController>(context);
     return Scaffold(
-        body: Consumer<BaseController>(
-          builder: (context, data, child) {
-            return pages[data.pageIndex];
-          },
-        ),
-        bottomNavigationBar: FlashyTabBar(
-          animationCurve: Curves.linear,
-          selectedIndex: data.pageIndex,
-          // selectedIndex: 0,
-          showElevation: true,
-          onItemSelected: (index) => setState(() {
-            data.newScreenIndex(index);
-          }),
-          items: [
-            FlashyTabBarItem(
-              icon: const Icon(
-                Icons.home,
-                size: 30,
-                color: Colors.black,
-              ),
-              title: txt(
-                'Home',
-                size: 15,
-                weight: FontWeight.w600,
-                color: Colors.black,
-              ),
+      body: Consumer<BaseController>(
+        builder: (context, data, child) {
+          return pages[data.pageIndex];
+        },
+      ),
+      bottomNavigationBar: FlashyTabBar(
+        animationCurve: Curves.linear,
+        selectedIndex: data.pageIndex,
+        // selectedIndex: 0,
+        showElevation: true,
+        onItemSelected: (index) => setState(() {
+          data.newScreenIndex(index);
+        }),
+        items: [
+          FlashyTabBarItem(
+            icon: const Icon(
+              Icons.home,
+              size: 30,
+              color: Colors.black,
             ),
-            FlashyTabBarItem(
-              icon: const Icon(
-                Icons.military_tech,
-                size: 30,
-                color: Colors.black,
-              ),
-              title: txt(
-                'Badges',
-                size: 15,
-                weight: FontWeight.w600,
-                color: Colors.black,
-              ),
+            title: txt(
+              'Home',
+              size: 15,
+              weight: FontWeight.w600,
+              color: Colors.black,
             ),
-            FlashyTabBarItem(
-              icon: const Icon(
-                Icons.bar_chart,
-                size: 30,
-                color: Colors.black,
-              ),
-              title: txt(
-                'Stats',
-                size: 15,
-                weight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-            FlashyTabBarItem(
-              icon: const Icon(
-                Icons.person,
-                size: 30,
-                color: Colors.black,
-              ),
-              title: txt(
-                'Profile',
-                size: 15,
-                weight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => PhotoCaptureScreen()));
-          },
-          backgroundColor: Colors.black,
-          child: const Icon(
-            Icons.document_scanner,
-            color: Colors.white,
           ),
-        ));
+          FlashyTabBarItem(
+            icon: const Icon(
+              Icons.military_tech,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: txt(
+              'Challenges',
+              size: 15,
+              weight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          FlashyTabBarItem(
+            icon: const Icon(
+              Icons.bar_chart,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: txt(
+              'Stats',
+              size: 15,
+              weight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          FlashyTabBarItem(
+            icon: const Icon(
+              Icons.person,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: txt(
+              'Profile',
+              size: 15,
+              weight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.of(context).push(
+      //         MaterialPageRoute(builder: (context) => PhotoCaptureScreen()));
+      //   },
+      //   backgroundColor: Colors.black,
+      //   child: const Icon(
+      //     Icons.document_scanner,
+      //     color: Colors.white,
+      //   ),
+      // ),
+    );
   }
 }

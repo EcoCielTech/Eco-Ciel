@@ -1,4 +1,5 @@
 import 'package:ecociel/services/backend_services.dart';
+import 'package:ecociel/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -23,6 +24,7 @@ class _PhotoCaptureScreenState extends State<PhotoCaptureScreen> {
     }
   }
 
+  String ocrResult = "";
   Future<void> _sendPhoto() async {
     if (_imageFile != null) {
       // Add your JSON data if needed
@@ -34,6 +36,9 @@ class _PhotoCaptureScreenState extends State<PhotoCaptureScreen> {
       if (result == "Error") {
         print("Error somewhere");
       }
+      setState(() {
+        ocrResult = result;
+      });
       print("Result: $result");
     } else {
       // No image selected
@@ -45,26 +50,64 @@ class _PhotoCaptureScreenState extends State<PhotoCaptureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Photo Capture Screen'),
+        title: Text('Verification Click'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _imageFile == null
-                ? Text('No photo taken yet')
-                : Image.file(_imageFile!),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _takePhoto,
-              child: Text('Take Photo'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _sendPhoto,
-              child: Text('Send'),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _imageFile == null
+                  ? Text('Click a photo of bill/ticket/proof ')
+                  : Image.file(_imageFile!),
+              SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.black, // Set the background color to black
+                  elevation: 5, // Set the elevation (shadow) for the button
+                ),
+                onPressed: _takePhoto,
+                child: txt('Take Photo', color: Colors.white),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.black, // Set the background color to black
+                  elevation: 5, // Set the elevation (shadow) for the button
+                ),
+                onPressed: _sendPhoto,
+                child: txt('Send to verify', color: Colors.white),
+              ),
+              ocrResult != ""
+                  ? txt(
+                      "Photo Could Not be verified",
+                      color: Colors.red,
+                      size: 20,
+                      weight: FontWeight.w700,
+                    )
+                  : Container(),
+              ocrResult != ""
+                  ? txt(
+                      "Ocr Result",
+                      // color: Colors.bla,
+                      size: 18,
+                      weight: FontWeight.w600,
+                    )
+                  : Container(),
+              ocrResult != ""
+                  ? Divider(
+                      color: Colors.black,
+                    )
+                  : Container(),
+              ocrResult != ""
+                  ? txt(
+                      ocrResult,
+                      size: 18,
+                      weight: FontWeight.w400,
+                    )
+                  : Container(),
+            ],
+          ),
         ),
       ),
     );

@@ -22,7 +22,7 @@ class ProfileMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    var iconColor = isDark ? Colors.amberAccent : Color(0xff967aa1);
+    var iconColor = isDark ? Colors.amberAccent : Colors.black;
 
     return ListTile(
       onTap: onPress,
@@ -197,8 +197,9 @@ class ProfilePage extends StatelessWidget {
     var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         // leading: IconButton(onPressed: () => Get.back(), icon: const Icon(LineAwesomeIcons.angle_left)),
-        title: Text("My Profile", style: Theme.of(context).textTheme.headline4),
+        title: txt("My Profile", size: 20, weight: FontWeight.bold),
         // actions: [IconButton(onPressed: () {}, icon: Icon(isDark ? LineAwesomeIcons.sun : LineAwesomeIcons.moon))],
       ),
       body: SingleChildScrollView(
@@ -249,11 +250,11 @@ class ProfilePage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff967aa1),
+                      backgroundColor: Colors.black,
                       side: BorderSide.none,
                       shape: const StadiumBorder()),
                   child: const Text("Edit Profile",
-                      style: TextStyle(color: Colors.black)),
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
               const SizedBox(height: 30),

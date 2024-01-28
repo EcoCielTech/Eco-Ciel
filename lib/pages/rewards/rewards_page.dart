@@ -96,12 +96,24 @@ class _RewardsPageState extends State<RewardsPage> {
   }
 
   String selectedValue = "walk";
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _desController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
+  @override
+  void initState() {
+    _nameController.text = "Walk to Work";
+    _desController.text =
+        "You have to walk to work or anywhere you prefer. Minimum distance is 5 kms to complete this";
+    _numberController.text = "5 km";
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        title: txt("Challenges", size: 20, weight: FontWeight.bold),
         actions: const [
           Icon(
             Icons.notifications_none_outlined,
@@ -115,11 +127,8 @@ class _RewardsPageState extends State<RewardsPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: txt('Challenge Creator', size: 30, isBold: true),
-                    ),
                     TextField(
+                      controller: _nameController,
                       // obscureText: obsText,
                       cursorColor: Colors.black,
                       style: const TextStyle(color: Colors.black),
@@ -144,6 +153,7 @@ class _RewardsPageState extends State<RewardsPage> {
                       height: 20,
                     ),
                     TextField(
+                      controller: _desController,
                       // obscureText: obsText,
                       cursorColor: Colors.black,
                       style: const TextStyle(color: Colors.black),
@@ -195,6 +205,7 @@ class _RewardsPageState extends State<RewardsPage> {
                       height: 20,
                     ),
                     TextField(
+                      controller: _numberController,
                       // obscureText: obsText,
                       cursorColor: Colors.black,
                       style: const TextStyle(color: Colors.black),
@@ -235,7 +246,11 @@ class _RewardsPageState extends State<RewardsPage> {
                       height: 40,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          newChallenge = !newChallenge;
+                        });
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: Padding(
@@ -249,14 +264,21 @@ class _RewardsPageState extends State<RewardsPage> {
               )
             : Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: txt('Public Challenges', size: 30, isBold: true),
-                  ),
                   Container(
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlueAccent,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
                     padding: EdgeInsets.all(10.0),
                     margin: EdgeInsets.all(10.0),
-                    color: Colors.lightBlueAccent,
                     child: Column(
                       children: [
                         txt(

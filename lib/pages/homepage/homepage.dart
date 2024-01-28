@@ -63,7 +63,7 @@ List<Color> badgeColors = [
 
 String lat = "";
 String long = "";
-String userName = "User"; // Default value
+String userName = "Kartikey"; // Default value
 String? _currentAddress;
 Position? _currentPosition;
 List<String> text1 = ["", "", "", ""];
@@ -142,6 +142,12 @@ class _HomePageState extends State<HomePage> {
       responseFromBackend['currentTemp'].toStringAsFixed(2),
       responseFromBackend['uvdata'].toStringAsFixed(2),
     ];
+    text1 = [
+      "65 %",
+      "29.01 °C",
+      43.toString(),
+      5.00.toString(),
+    ];
 
     print(responseFromBackend);
   }
@@ -162,21 +168,21 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List<String> badges = [
       AppLocalizations.of(context)!.green,
-      AppLocalizations.of(context)!.esaver,
-      AppLocalizations.of(context)!.advocate,
-      AppLocalizations.of(context)!.citizens,
+      // AppLocalizations.of(context)!.esaver,
+      // AppLocalizations.of(context)!.advocate,
+      // AppLocalizations.of(context)!.citizens,
       AppLocalizations.of(context)!.leader,
-      AppLocalizations.of(context)!.waterc,
-      AppLocalizations.of(context)!.cleanec,
+      // AppLocalizations.of(context)!.waterc,
+      // AppLocalizations.of(context)!.cleanec,
     ];
     List<String> badgesDescription = [
       AppLocalizations.of(context)!.greendescription,
-      AppLocalizations.of(context)!.esaverdescription,
-      AppLocalizations.of(context)!.advocatedescription,
-      AppLocalizations.of(context)!.citizensdescription,
+      // AppLocalizations.of(context)!.esaverdescription,
+      // AppLocalizations.of(context)!.advocatedescription,
+      // AppLocalizations.of(context)!.citizensdescription,
       AppLocalizations.of(context)!.leaderdescription,
-      AppLocalizations.of(context)!.watercdescription,
-      AppLocalizations.of(context)!.cleanecdescription,
+      // AppLocalizations.of(context)!.watercdescription,
+      // AppLocalizations.of(context)!.cleanecdescription,
     ];
     List<String> text2 = [
       AppLocalizations.of(context)!.humidity,
@@ -187,6 +193,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        title: txt("Homepage", size: 20, weight: FontWeight.bold),
         actions: const [
           Icon(
             Icons.notifications_none_outlined,
@@ -257,13 +264,16 @@ class _HomePageState extends State<HomePage> {
                 ),
                 txt("Recommended Challenges",
                     color: Colors.black, size: 24, weight: FontWeight.w600),
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   width: 400,
                   height: 400,
                   child: ListView.separated(
                       separatorBuilder: (context, index) =>
-                          const SizedBox(height: 10),
-                      itemCount: 7,
+                          const SizedBox(height: 20),
+                      itemCount: 2,
                       itemBuilder: (context, index) {
                         return ListTileWidget(
                           color: badgeColors[index],

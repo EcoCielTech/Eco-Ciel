@@ -1,3 +1,4 @@
+import 'package:ecociel/pages/base/test_api.dart';
 import 'package:ecociel/utils/text.dart';
 import 'package:flutter/material.dart';
 
@@ -6,12 +7,14 @@ class ListTileWidget extends StatelessWidget {
   String badgeDescription;
   Color color;
   String imageAsset;
-  ListTileWidget(
-      {required this.badgeDescription,
-      required this.imageAsset,
-      required this.badgeName,
-      required this.color,
-      super.key});
+
+  ListTileWidget({
+    required this.badgeDescription,
+    required this.imageAsset,
+    required this.badgeName,
+    required this.color,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +24,17 @@ class ListTileWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: color,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          ),
+        ],
       ),
       padding: const EdgeInsets.all(15),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: 50,
@@ -47,6 +57,7 @@ class ListTileWidget extends StatelessWidget {
               Container(
                 width: 240,
                 child: txt(
+                  textAlign: TextAlign.start,
                   badgeName,
                   size: 18,
                   weight: FontWeight.w500,
@@ -67,10 +78,16 @@ class ListTileWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          const Icon(
-            Icons.more_vert,
-            size: 25,
-          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PhotoCaptureScreen()));
+            },
+            child: const Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+          )
         ],
       ),
     );

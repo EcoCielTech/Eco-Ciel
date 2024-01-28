@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecociel/mainController.dart';
 import 'package:ecociel/pages/base/base.dart';
+import 'package:ecociel/pages/base/controller/base_page_controller.dart';
 import 'package:ecociel/pages/signin.dart/signin.dart';
 import 'package:ecociel/utils/text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 final _auth = FirebaseAuth.instance;
 
@@ -165,6 +168,50 @@ class _SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("<100000"),
+              ),
+            ],
+          ),
+          decoration: const ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+    ];
+    return menuItems;
+  }
+
+  List<DropdownMenuItem<int>> get lang {
+    List<DropdownMenuItem<int>> menuItems = [
+      DropdownMenuItem(
+        value: 0,
+        child: Container(
+          child: const Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("English"),
+              ),
+            ],
+          ),
+          decoration: const ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1.0, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 25000,
+        child: Container(
+          child: const Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Tamil"),
               ),
             ],
           ),
@@ -347,6 +394,8 @@ class _SignUpPageState extends State<SignUpPage> {
   int selectedValue = 15000;
   int eventParticipantsPast = 10;
   bool selectedValueCommunity = true;
+  var selectedValueLangInt = 0;
+  String selectedLang = "en";
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -370,6 +419,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Padding(
           padding: const EdgeInsets.all(14.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               txt(
                 AppLocalizations.of(context)!.signupemail,
@@ -528,6 +578,38 @@ class _SignUpPageState extends State<SignUpPage> {
                   items: dropdownItemsCommunityEventParticipants,
                   isExpanded: true,
                 ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Consumer<MainController>(
+                builder: (context, data, child) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      txt(
+                        data.language == "en" ? "Language" : "மொழி",
+                        color: Colors.black87,
+                        weight: FontWeight.w500,
+                      ),
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton<int>(
+                          value: selectedValueLangInt,
+                          onChanged: (int? newValue) {
+                            setState(() {
+                              selectedValueLangInt = newValue!;
+                            });
+                            selectedLang =
+                                selectedValueLangInt == 0 ? "en" : "ta";
+                            data.lang(selectedLang);
+                          },
+                          items: lang,
+                          isExpanded: true,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(
                 height: 20,
