@@ -111,22 +111,22 @@ class OnBoarding extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Container(
-                child: Image.asset('assets/svg/intro1.png'),
-              ),
-              const SizedBox(
-                height: 54,
-              ),
-              txt(
-                "Request Ride",
-                weight: FontWeight.w500,
-                size: 24,
+                child: Image.asset('assets/images/green_intro1.png'),
               ),
               const SizedBox(
                 height: 20,
               ),
               txt(
-                'Request a ride get picked up a nearby driver',
-                weight: FontWeight.w400,
+                "EcoCeil",
+                weight: FontWeight.w700,
+                size: 36,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              txt(
+                'Turning Green Choices into Rewards, Naturally!',
+                weight: FontWeight.w500,
                 size: 22,
               ),
             ],
@@ -137,23 +137,23 @@ class OnBoarding extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Container(
-                child: Image.asset('assets/svg/intro2.png'),
+                child: Image.asset('assets/images/green_intro2.png'),
               ),
               const SizedBox(
                 height: 20,
               ),
               txt(
-                "Realtime Tracking",
+                "Save and Earn",
                 weight: FontWeight.w500,
-                size: 24,
+                size: 36,
               ),
               const SizedBox(
                 height: 20,
               ),
               txt(
-                'Know your driver in advance and be able to view current location real on the map',
+                'A way to save earth and earn rewards for your green choices',
                 weight: FontWeight.w400,
-                size: 16,
+                size: 18,
               ),
             ],
           ),
@@ -166,7 +166,7 @@ class OnBoarding extends StatelessWidget {
                 // height: 200,
                 // width: 200,
                 child: Image.asset(
-                  'assets/svg/intro3.png',
+                  'assets/images/green_intro3.png',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -177,17 +177,18 @@ class OnBoarding extends StatelessWidget {
               //   height: 350 - 16,
               // ),
               txt(
-                "Earn Money",
+                "Real-time Air Quality Monitoring Redefined by EcoCiel\'s AI-Powered Solutions",
                 weight: FontWeight.w500,
-                size: 24,
+                size: 22,
+                textAlign: TextAlign.center,
               ),
               const SizedBox(
                 height: 20,
               ),
               txt(
-                'Give Rides nearby by passenger, use promo code & earn money',
+                "Breathe easy with EcoCiel's AI-driven real-time air quality monitoring, empowering informed choices for healthier living.",
                 weight: FontWeight.w400,
-                size: 22,
+                size: 14,
               ),
             ],
           ),
@@ -200,20 +201,20 @@ class OnBoarding extends StatelessWidget {
                 child: Image.asset('assets/svg/intro4.png'),
               ),
               SizedBox(
-                height: 10,
+                height: 25,
               ),
               txt(
                 "Enable Location",
                 weight: FontWeight.w500,
-                size: 24,
+                size: 20,
               ),
               const SizedBox(
                 height: 10,
               ),
               txt(
-                'Enable your locatiob to start find the request around you',
+                'Enable your location to start saving and earning rewards',
                 weight: FontWeight.w400,
-                size: 22,
+                size: 18,
               ),
               // const SizedBox(
               //   height: 150,

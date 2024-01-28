@@ -44,20 +44,56 @@ class _BaseState extends State<Base> {
           }),
           items: [
             FlashyTabBarItem(
-              icon: const Icon(Icons.home, size: 30),
-              title: txt('Home', size: 15, weight: FontWeight.w600),
+              icon: const Icon(
+                Icons.home,
+                size: 30,
+                color: Colors.black,
+              ),
+              title: txt(
+                'Home',
+                size: 15,
+                weight: FontWeight.w600,
+                color: Colors.black,
+              ),
             ),
             FlashyTabBarItem(
-              icon: const Icon(Icons.military_tech, size: 30),
-              title: txt('Badges', size: 15, weight: FontWeight.w600),
+              icon: const Icon(
+                Icons.military_tech,
+                size: 30,
+                color: Colors.black,
+              ),
+              title: txt(
+                'Badges',
+                size: 15,
+                weight: FontWeight.w600,
+                color: Colors.black,
+              ),
             ),
             FlashyTabBarItem(
-              icon: const Icon(Icons.bar_chart, size: 30),
-              title: txt('Stats', size: 15, weight: FontWeight.w600),
+              icon: const Icon(
+                Icons.bar_chart,
+                size: 30,
+                color: Colors.black,
+              ),
+              title: txt(
+                'Stats',
+                size: 15,
+                weight: FontWeight.w600,
+                color: Colors.black,
+              ),
             ),
             FlashyTabBarItem(
-              icon: const Icon(Icons.person, size: 30),
-              title: txt('Profile', size: 15, weight: FontWeight.w600),
+              icon: const Icon(
+                Icons.person,
+                size: 30,
+                color: Colors.black,
+              ),
+              title: txt(
+                'Profile',
+                size: 15,
+                weight: FontWeight.w600,
+                color: Colors.black,
+              ),
             ),
           ],
         ),
@@ -66,8 +102,11 @@ class _BaseState extends State<Base> {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => PhotoCaptureScreen()));
           },
-          child: const Icon(Icons.home),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.black,
+          child: const Icon(
+            Icons.document_scanner,
+            color: Colors.white,
+          ),
         ));
   }
 }

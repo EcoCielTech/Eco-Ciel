@@ -1,6 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecociel/pages/base/base.dart';
 import 'package:ecociel/pages/signin.dart/signin.dart';
 import 'package:ecociel/utils/text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+final _auth = FirebaseAuth.instance;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -9,26 +15,65 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-void submit(String email, String password) {
-  print("Email: ${email}");
-  print("Pass: ${password}");
-}
-
 class _SignUpPageState extends State<SignUpPage> {
+  void submit(String email, String password, String name, double income,
+      bool community, double pastParticipation) async {
+    print(email);
+    print(password);
+    try {
+      final UserCredential = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      print("No Issued");
+      await FirebaseFirestore.instance
+          .collection('userdata')
+          .doc(UserCredential.user!.email)
+          .set({
+        'name': name,
+        'email': email,
+        'password': password,
+        'income': income,
+        'community': community,
+        'pastParticipation': pastParticipation,
+        'ciel-coins': 0,
+        'clean-energy-champion': 1,
+        'currentchallengedaily': "",
+        'currentchallengemonthly': "",
+        'eco-commute': 1,
+        'energy-saver': 1,
+        'sustainable-shopper': 1,
+      });
+      print("User Created - ${UserCredential}");
+    } catch (e) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+      print(e);
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Base(),
+      ),
+    );
+  }
+
   List<DropdownMenuItem<int>> get dropdownItems {
     List<DropdownMenuItem<int>> menuItems = [
       DropdownMenuItem(
         value: 15000,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<15000"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -39,15 +84,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 25000,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<25000"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -58,15 +103,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 50000,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<50000"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -77,15 +122,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 75000,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<75000"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -96,15 +141,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 95000,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<100000"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -115,15 +160,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 100000,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<100000"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -143,12 +188,12 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Yes"),
+                padding: EdgeInsets.all(8.0),
+                child: Text(AppLocalizations.of(context)!.yes),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -162,12 +207,12 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("No"),
+                padding: EdgeInsets.all(8.0),
+                child: Text(AppLocalizations.of(context)!.no),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -184,15 +229,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 10,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<10"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -203,15 +248,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 25,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<25"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -222,15 +267,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 50,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<50"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -241,15 +286,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 75,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<75"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -260,15 +305,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 95,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("<100"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -279,15 +324,15 @@ class _SignUpPageState extends State<SignUpPage> {
       DropdownMenuItem(
         value: 100,
         child: Container(
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text(">100"),
               ),
             ],
           ),
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 1.0, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -305,13 +350,18 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _incomeController = TextEditingController();
+  final TextEditingController _communityController = TextEditingController();
+  final TextEditingController _communityEventParticipantsController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     bool? value = false;
     return Scaffold(
       appBar: AppBar(
         title: txt(
-          'Sign Up',
+          AppLocalizations.of(context)!.signup,
           weight: FontWeight.w500,
           size: 24,
         ),
@@ -322,7 +372,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             children: [
               txt(
-                'Signup with your email',
+                AppLocalizations.of(context)!.signupemail,
                 weight: FontWeight.w400,
                 size: 24,
                 textAlign: TextAlign.left,
@@ -331,11 +381,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 40,
               ),
               TextField(
+                controller: _nameController,
                 // obscureText: obsText,
                 cursorColor: Colors.black,
                 style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                  labelText: 'Name',
+                  labelText: AppLocalizations.of(context)!.name,
                   labelStyle: const TextStyle(color: Colors.black),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -356,12 +407,10 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               TextField(
                 controller: _emailController,
-
-                // obscureText: obsText,
                 cursorColor: Colors.black,
                 style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  labelText: AppLocalizations.of(context)!.email,
                   labelStyle: const TextStyle(color: Colors.black),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -381,11 +430,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 20,
               ),
               TextField(
+                controller: _passwordController,
                 // obscureText: obsText,
                 cursorColor: Colors.black,
                 style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                  labelText: 'Name',
+                  labelText: AppLocalizations.of(context)!.password,
                   labelStyle: const TextStyle(color: Colors.black),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -407,7 +457,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Row(
                 children: [
                   txt(
-                    'Monthly Income',
+                    AppLocalizations.of(context)!.income,
                     color: Colors.black87,
                     weight: FontWeight.w500,
                   ),
@@ -421,6 +471,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     setState(() {
                       selectedValue = newValue!;
                     });
+                    _incomeController.text = selectedValue.toString();
                   },
                   items: dropdownItems,
                   isExpanded: true,
@@ -432,7 +483,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Row(
                 children: [
                   txt(
-                    'Previous Community Event Organised',
+                    AppLocalizations.of(context)!.prevevents,
                     color: Colors.black87,
                     weight: FontWeight.w500,
                   ),
@@ -445,6 +496,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     setState(() {
                       selectedValueCommunity = newValue!;
                     });
+                    _communityController.text =
+                        selectedValueCommunity.toString();
                   },
                   items: dropdownItemsCommunityEvents,
                   isExpanded: true,
@@ -456,7 +509,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Row(
                 children: [
                   txt(
-                    'Previous Community Event Participation',
+                    AppLocalizations.of(context)!.prevpart,
                     color: Colors.black87,
                     weight: FontWeight.w500,
                   ),
@@ -469,6 +522,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     setState(() {
                       eventParticipantsPast = newValue!;
                     });
+                    _communityEventParticipantsController.text =
+                        eventParticipantsPast.toString();
                   },
                   items: dropdownItemsCommunityEventParticipants,
                   isExpanded: true,
@@ -480,20 +535,15 @@ class _SignUpPageState extends State<SignUpPage> {
               Row(
                 children: [
                   Checkbox(
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     value: true,
                     checkColor: Colors.white,
-                    activeColor: Color(0xFF008955),
+                    activeColor: const Color(0xFF008955),
                     onChanged: (bool? newValue) {},
                   ),
                   txt(
-                    'By signing up. you agree to the ',
+                    AppLocalizations.of(context)!.terms,
                     color: Colors.grey.shade400,
-                    weight: FontWeight.w500,
-                  ),
-                  txt(
-                    'Terms of ',
-                    color: Color(0xFF008955),
                     weight: FontWeight.w500,
                   ),
                 ],
@@ -503,18 +553,28 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Row(
                   children: [
                     txt(
-                      'services ',
-                      color: Color(0xFF008955),
+                      AppLocalizations.of(context)!.terms,
+                      color: const Color(0xFF008955),
                       weight: FontWeight.w500,
                     ),
                     txt(
-                      ' and ',
+                      "${AppLocalizations.of(context)!.and} ",
                       color: Colors.grey.shade400,
                       weight: FontWeight.w500,
                     ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 50.0),
+                child: Row(
+                  children: [
                     txt(
-                      ' Privacy policy',
-                      color: Color(0xFF008955),
+                      AppLocalizations.of(context)!.privacy,
+                      color: const Color(0xFF008955),
                       weight: FontWeight.w500,
                     ),
                   ],
@@ -525,22 +585,28 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               InkWell(
                 onTap: () {
-                  // submit(_emailController.text, _passwordController.text);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SignInPage(),
-                    ),
-                  );
+                  submit(
+                      _emailController.text,
+                      _passwordController.text,
+                      _nameController.text,
+                      selectedValue.toDouble(),
+                      selectedValueCommunity,
+                      eventParticipantsPast.toDouble());
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const SignInPage(),
+                  //   ),
+                  // );
                 },
                 child: Container(
                   height: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF008955),
+                    color: const Color(0xFF008955),
                   ),
                   child: Center(
-                    child: txt("Sign up",
+                    child: txt(AppLocalizations.of(context)!.signup,
                         color: Colors.white, weight: FontWeight.w600, size: 24),
                   ),
                 ),
@@ -582,7 +648,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         borderRadius: BorderRadius.circular(10)),
                     child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: Image.asset(
                           "assets/icons/google.png",
                           // fit: BoxFit.fill,
@@ -598,7 +664,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         borderRadius: BorderRadius.circular(10)),
                     child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: Image.asset("assets/icons/facebook.png")),
                   ),
                   Container(
@@ -611,7 +677,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         borderRadius: BorderRadius.circular(10)),
                     child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: Image.asset("assets/icons/apple-logo.png")),
                   ),
                 ],

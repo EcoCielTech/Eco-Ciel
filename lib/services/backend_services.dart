@@ -58,39 +58,51 @@ class BackendServices {
     // Handle other exceptions if needed
   }
 
-  Future<Map<String, String>> getUVIndexandWeatherData(
+  Future<Map<String, dynamic>> getUVIndexandWeatherData(
       String lat, String lon, String month) async {
-    var urlStringForCurrentWeather =
-        "https://api.openweathermap.org/data/3.0/onecall?lat={$lat}&lon={$lon}&units=metric&appid=41bca8d01ca81fb04f760a9d65ea772d";
+    try {
+      var urlStringForCurrentWeather =
+          "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=bca8c048e93a78d8bdacdd36bbee9444";
+      var url = Uri.parse(urlStringForCurrentWeather);
+      dio.Dio dioClient = dio.Dio();
+      final resp = await dioClient.get(url.toString());
+      Map<String, dynamic> parsedCurrentWeatherData = resp.data;
+      var openUVDataurl =
+          "https://api.openuv.io/api/v1/uv?lat=28.65&lng=77.17&alt=100&dt=";
+      final response = await dioClient.get(openUVDataurl,
+          options: dio.Options(
+            headers: {"x-access-token": "openuv-bytfqeorlrwfva24-io"},
+          ));
+      Map<String, dynamic> parsedUVData = response.data;
+      // try {
+      // var urlStringForHistoryWeather =
+      //     "https://history.openweathermap.org/data/2.5/aggregated/month?lat={$lat}&lon={$lon}&month={$month}&units=metric&appid=41bca8d01ca81fb04f760a9d65ea772d";
 
-    dio.Dio dioClient = dio.Dio();
-    final resp = await dioClient.get(urlStringForCurrentWeather);
-    final parsedCurrentWeatherData = json.decode(resp.data);
-
-    var openUVDataurl =
-        "https://api.openuv.io/api/v1/uv?lat=28.65&lng=77.17&alt=100&dt=";
-
-    final response = await dioClient.get(openUVDataurl,
-        options: dio.Options(
-          headers: {"x-access-token": "openuv-bytfqeorlrwfva24-io"},
-        ));
-
-    final parsedUVData = json.decode(response.data);
-
-    var urlStringForHistoryWeather =
-        "https://history.openweathermap.org/data/2.5/aggregated/month?lat={$lat}&lon={$lon}&month={$month}&units=metric&appid=41bca8d01ca81fb04f760a9d65ea772d";
-
-    final resp2 = await dioClient.get(urlStringForHistoryWeather);
-    final parsedHistoryWeatherData = json.decode(resp2.data);
-
-    return {
-      "currentTemp": parsedCurrentWeatherData["current"]["temp"],
-      "currentHumidity": parsedCurrentWeatherData["current"]["humidity"],
-      "currentPressure": parsedCurrentWeatherData["current"]["pressure"],
-      "currentClouds": parsedCurrentWeatherData["current"]["clouds"],
-      "uvdata": parsedUVData["result"]["uv"],
-      "uvdataskintime": parsedUVData["result"]["safe_exposure_time"]["st1"],
-      "historicaltemp": parsedHistoryWeatherData["result"]["temp"]["mean"]
-    };
+      // final resp2 = await dioClient.get(urlStringForHistoryWeather);
+      // //   print("ParsedUV:  ${resp2.statusCode}");
+      // final parsedHistoryWeatherData = resp2.data;
+      // } catch (e) {
+      //   print(e);
+      // }
+      return {
+        "currentTemp": parsedCurrentWeatherData["main"]["temp"] - 273.15,
+        "currentHumidity": parsedCurrentWeatherData["main"]["humidity"],
+        "currentPressure": parsedCurrentWeatherData["main"]["pressure"],
+        "currentClouds": parsedCurrentWeatherData["clouds"],
+        "uvdata": parsedUVData["result"]["uv"],
+        "uvdataskintime": parsedUVData["result"]["safe_exposure_time"]["st1"],
+        "historicaltemp": parsedCurrentWeatherData["main"]["temp"] - 275.15,
+      };
+    } catch (e) {
+      // Handle the error as needed, you might want to return a default value or throw an exception.
+      return {
+        "currentTemp": 0.0,
+        "currentHumidity": 0,
+        "currentPressure": 0,
+        "currentClouds": 0,
+        "uvdata": 0,
+        "uvdataskintime": 0,
+      };
+    }
   }
 }

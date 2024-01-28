@@ -1,0 +1,142 @@
+{ "welcome" : "Welcome Back",
+"@welcome":{
+    "description":"Welcome Back"
+},
+"humidity" : "Humidity",
+"@humidity":{
+    "description":"Humidity"
+},
+"temperature" : "Temperature",
+"@temperature":{
+    "description":"Temperature"
+},
+"coins" : "EcoCiel Coins",
+"@coins":{
+    "description":"EcoCiel Coins"
+},
+"uv" : "UV Index",
+"@uv":{
+    "description":"UV Index"
+},
+"signup" : "Sign Up",
+"@signup":{
+    "description":"Sign Up"
+},
+"signupemail" : "Signup with your email",
+"@signupemail":{
+    "description":"Signup with your email"
+},
+"name" : "Name",
+"@name":{
+    "description":"Name"
+},
+"email" : "Email",
+"@email":{
+    "description":"Email"
+},
+"password" : "Password",
+"@password":{
+    "description":"Password"
+},
+"income" : "Monthly Income",
+"@income":{
+    "description":"Monthly Income"
+},
+"prevevents" : "Previous Community Event Organised",
+"@prevevents":{
+    "description":"Previous Community Event Organised"
+},
+"prevpart" : "Previous Community Event Participation",
+"@prevpart":{
+    "description":"Previous Community Event Participation"
+},
+"terms" : "Terms of services",
+"@terms":{
+    "description":"Terms of services"
+},
+"privacy" : "Privacy Policy",
+"@privacy":{
+    "description":"Privacy Policy"
+},
+"and" : "and",
+"@and":{
+    "description":"and"
+},
+"yes" : "Yes",
+"@yes":{
+    "description":"Yes"
+},
+"no" : "No",
+"@no":{
+    "description":"No"
+},
+"agree" : "By signing up. you agree to the",
+"@agree":{
+    "description":"By signing up. you agree to the"
+},
+"creator" : "Challenge Creator",
+"@creator":{
+    "description":"Challenge Creator"
+},
+"description" : "Description",
+"@description":{
+    "description":"Description"
+},
+"type" : "Type",
+"@type":{
+    "description":"Type"
+},
+"number" : "Number",
+"@number":{
+    "description":"Number"
+},
+"verify" : "Owner Verifiable",
+"@verify":{
+    "description":"Owner Verifiable"
+},
+"makechallenge" : "Make a Challenge",
+"@makechallenge":{
+    "description":"Make a Challenge"
+},
+"walk" : "Walk",
+"@walk":{
+    "description":"Walk"
+},
+"energy" : "Energy",
+"@energy":{
+    "description":"Energy"
+},
+"organic" : "Organic",
+"@organic":{
+    "description":"Organic"
+},
+"waste" : "Local Community Waste",
+"@waste":{
+    "description":"Local Community Waste"
+},
+"green" : "Green Commuters",
+    "greendescription":"Paving the Way to Eco-Friendly Journeys.",
+
+"esaver" : "Energy Saver",
+    "esaverdescription":"Empowering a Brighter Future Through Efficiency.",
+
+"advocate" : "Nature Advocate",
+    "advocatedescription":"Voices for the Environment, Guardians of the Earth.",
+
+"citizens" : "Sustainable Citizen",
+    "citizensdescription":"Nurturing Our Planet, One Action at a Time.",
+
+"leader" : "Community Leader",
+    "leaderdescription":"Inspiring Change, Uniting for a Greener World.",
+
+"waterc" : "Water Conservationist",
+    "watercdescription":"Preserving Every Drop, Sustaining Life.",
+
+"cleanec" : "Clean Energy Champion",
+    "cleanecdescription":"Fueling Progress with Renewable Power."
+
+
+
+
+
+}
